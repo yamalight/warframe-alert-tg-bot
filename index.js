@@ -14,7 +14,7 @@ const interestingItems = [
   'LotusShotgunRandomModRare',
 ];
 
-const interestingItemsAlerts = interestingItems.concat(['FormaBlueprint', 'Alertium']);
+const interestingItemsAlerts = interestingItems.concat(['FormaBlueprint', 'Alertium', 'CatbrowGeneticSignature']);
 
 const itemNames = {
   OrokinReactorBlueprint: 'Orokin Reactor Blueprint',
@@ -25,6 +25,7 @@ const itemNames = {
   LotusPistolRandomModRare: 'Pistol Riven Mod',
   LotusRifleRandomModRare: 'Rifle Riven Mod',
   LotusShotgunRandomModRare: 'Shotgun Riven Mod',
+  CatbrowGeneticSignature: 'Kavat Genetic Code',
 };
 
 const CHECK_INTERVAL = 10 * 60 * 1000; // 10 mins
@@ -115,6 +116,10 @@ const start = () => {
   };
   const bot = new Telegraf(process.env.BOT_TOKEN);
   bot.command('lwstart', async ctx => {
+    if (status === 'running') {
+      ctx.reply('Already running!');
+      return;
+    }
     ctx.reply(`OK, I'll let you know when cool things are in alerts or invasions.`);
     status = 'running';
     context = ctx;
@@ -133,9 +138,10 @@ const start = () => {
   });
   bot.command('lwhelp', ctx => {
     ctx.reply(`Here's commands I know:
-* start - will start monitoring process
-* stop - will stop monitoring process
-* status - will display current monitoring status`);
+* /lwstart - will start monitoring process
+* /lwstop - will stop monitoring process
+* /lwstatus - will display current monitoring status
+* /lwhelp - this help thingy`);
   });
   bot.startPolling();
   console.log('Bot is now running!');
