@@ -138,12 +138,7 @@ const start = () => {
 * status - will display current monitoring status`);
   });
   bot.startPolling();
-  // setInterval(() => handleCheck(context), CHECK_INTERVAL);
   console.log('Bot is now running!');
 };
-
-// handleCheck({
-// reply: (...args) => console.log(args),
-// });
 
 start();
