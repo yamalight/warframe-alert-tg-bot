@@ -18,7 +18,7 @@ const interestingItemsAlerts = interestingItems.concat(['FormaBlueprint', 'Alert
 
 const itemNames = {
   OrokinReactorBlueprint: 'Orokin Reactor Blueprint',
-  OrokinCatalystBlueprint: 'Orokin Catalyst Bluepring',
+  OrokinCatalystBlueprint: 'Orokin Catalyst Blueprint',
   Alertium: 'Nitain',
   FormaBlueprint: 'Forma Blueprint',
   PlayerMeleeWeaponRandomModRare: 'Melee Riven Mod',
