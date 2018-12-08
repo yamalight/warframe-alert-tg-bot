@@ -85,7 +85,8 @@ Rewards: ${alert.rewards
           .map(reward => itemNames[reward])
           .filter(r => r)
           .join(' ')}
-Ends in: ${dateFns.distanceInWordsToNow(alert.end)}`
+Ends in: ${dateFns.distanceInWordsToNow(alert.end)}
+${alert.start > Date.now() ? `Starts in: ${dateFns.distanceInWordsToNow(alert.start)}` : ''}`
       );
     });
 
