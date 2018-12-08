@@ -102,7 +102,7 @@ Rewards: ${invasion.attackReward
           .concat(invasion.defenderReward)
           .map(reward => itemNames[reward])
           .filter(r => r)
-          .join(' ')}
+          .join(', ')}
 Current progress: ~${(Math.floor(Math.abs(invasion.count / invasion.goal) * 100) / 100) * 100}%`
       );
     });
