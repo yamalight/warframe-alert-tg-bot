@@ -83,7 +83,7 @@ exports.fetchData = async () => {
  * Formats given alert into a string
  * @param {Object} alert
  */
-exports.formatAlert = alert => `NEW ALERT:
+exports.formatAlert = ({alert, now}) => `NEW ALERT:
 Rewards: ${alert.rewards
   .map(reward => itemNames[reward])
   .filter(r => r)

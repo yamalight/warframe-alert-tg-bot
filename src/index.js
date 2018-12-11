@@ -26,7 +26,7 @@ const handleCheck = async ctx => {
       // add to cache
       cache.set(alert.id, alert.id, dateFns.differenceInMilliseconds(alert.end, now));
       // reply with formatted human-readable info about alert
-      ctx.reply(formatAlert(alert));
+      ctx.reply(formatAlert({alert, now}));
     });
 
   // send invasion messages
