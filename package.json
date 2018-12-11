@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,9 @@
     "got": "^9.3.2",
     "telegraf": "^3.25.1",
     "ttl-mem-cache": "^4.0.2"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0",
+    "nock": "^10.0.4"
   }
 }

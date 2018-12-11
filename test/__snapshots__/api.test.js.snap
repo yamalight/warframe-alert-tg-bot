@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Warframe API handling should fetch invasions and alerts 1`] = `
+Object {
+  "alerts": Array [
+    Object {
+      "end": 2018-12-11T21:38:38.415Z,
+      "id": "5c1020a14c4d2f1f193cc4dd",
+      "rewards": Array [
+        "Alertium",
+      ],
+      "start": 2018-12-11T20:44:09.689Z,
+      "type": "MT_TERRITORY",
+    },
+  ],
+  "invasions": Array [
+    Object {
+      "attackReward": Array [],
+      "count": -1623,
+      "defenderReward": Array [
+        "OrokinReactorBlueprint",
+      ],
+      "goal": 45000,
+      "id": "5c100cb560f09a7108813c9e",
+    },
+  ],
+}
+`;
+
+exports[`Warframe API handling should format alert info 1`] = `
+"NEW ALERT:
+Rewards: Nitain
+Ends in: 40 mins
+Starts in: 5 mins"
+`;
+
+exports[`Warframe API handling should format invasion info 1`] = `
+"NEW INVASION: 
+Rewards: Orokin Reactor Blueprint, Orokin Catalyst Blueprint
+Current progress: ~1%"
+`;
