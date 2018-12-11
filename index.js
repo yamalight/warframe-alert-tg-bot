@@ -73,11 +73,12 @@ const handleCheck = async ctx => {
   const {alerts, invasions} = await fetchData();
 
   // send alert messages
+  const now = Date.now();
   alerts
     .filter(alert => !cache.get(alert.id))
     .forEach(alert => {
       // add to cache
-      cache.set(alert.id, alert.id, dateFns.differenceInMilliseconds(alert.end, Date.now()));
+      cache.set(alert.id, alert.id, dateFns.differenceInMilliseconds(alert.end, now));
 
       ctx.reply(
         `NEW ALERT:
@@ -85,8 +86,8 @@ Rewards: ${alert.rewards
           .map(reward => itemNames[reward])
           .filter(r => r)
           .join(' ')}
-Ends in: ${dateFns.distanceInWordsToNow(alert.end)}
-${alert.start > Date.now() ? `Starts in: ${dateFns.distanceInWordsToNow(alert.start)}` : ''}`
+Ends in: ${dateFns.differenceInMinutes(alert.end, now)} mins
+${alert.start > now ? `Starts in: ${dateFns.differenceInMinutes(alert.start, now)} mins` : ''}`
       );
     });
 
