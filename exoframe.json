@@ -1,0 +1,6 @@
+{
+  "name": "warframe-alert-bot",
+  "env": {
+    "BOT_TOKEN": "@warframe-tg-token"
+  }
+}

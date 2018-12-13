@@ -75,7 +75,7 @@ module.exports = () => {
     // store chat context for replies
     context = ctx;
     // call initial alerts parsing
-    await handleCheck(ctx);
+    await handleCheck(context);
     // schedule checks at the given interval
     nextCheckInterval = setInterval(() => handleCheck(ctx), CHECK_INTERVAL);
   });
