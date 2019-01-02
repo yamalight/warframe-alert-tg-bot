@@ -13,6 +13,7 @@ const dataUrl = 'http://content.warframe.com/dynamic/worldState.php';
 const interestingItems = [
   'OrokinReactorBlueprint',
   'OrokinCatalystBlueprint',
+  'UtilityUnlockerBlueprint',
   'PlayerMeleeWeaponRandomModRare',
   'LotusPistolRandomModRare',
   'LotusRifleRandomModRare',
@@ -33,6 +34,7 @@ const itemNames = {
   OrokinCatalystBlueprint: 'Orokin Catalyst Blueprint',
   Alertium: 'Nitain',
   FormaBlueprint: 'Forma Blueprint',
+  UtilityUnlockerBlueprint: 'Exilus Adapter',
   PlayerMeleeWeaponRandomModRare: 'Melee Riven Mod',
   LotusPistolRandomModRare: 'Pistol Riven Mod',
   LotusRifleRandomModRare: 'Rifle Riven Mod',
