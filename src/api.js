@@ -15,9 +15,13 @@ const interestingItems = [
   'OrokinCatalystBlueprint',
   'UtilityUnlockerBlueprint',
   'PlayerMeleeWeaponRandomModRare',
+  'LotusModularMeleeRandomModRare',
   'LotusPistolRandomModRare',
+  'LotusModularPistolRandomModRare',
   'LotusRifleRandomModRare',
+  'LotusModularRifleRandomModRare',
   'LotusShotgunRandomModRare',
+  'LotusModularShotgunRandomModRare',
 ];
 
 /**
