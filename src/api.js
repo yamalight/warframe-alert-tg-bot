@@ -36,9 +36,13 @@ const itemNames = {
   FormaBlueprint: 'Forma Blueprint',
   UtilityUnlockerBlueprint: 'Exilus Adapter',
   PlayerMeleeWeaponRandomModRare: 'Melee Riven Mod',
+  LotusModularMeleeRandomModRare: 'Zaw Riven Mod',
   LotusPistolRandomModRare: 'Pistol Riven Mod',
+  LotusModularPistolRandomModRare: 'Kitgun Riven Mod',
   LotusRifleRandomModRare: 'Rifle Riven Mod',
+  LotusModularRifleRandomModRare: 'Modular Rifle Riven Mod',
   LotusShotgunRandomModRare: 'Shotgun Riven Mod',
+  LotusModularShotgunRandomModRare: 'Modular Shotgun Riven Mod',
   CatbrowGeneticSignature: 'Kavat Genetic Code',
 };
 
