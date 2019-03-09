@@ -1,7 +1,13 @@
+/* eslint-env jest */
 const nock = require('nock');
 const dateFns = require('date-fns');
 const {fetchData, formatAlert, formatInvasion} = require('../src/api');
 const mockData = require('./fixtures/apiResponse.json');
+
+// update mock data timings
+mockData.Alerts.forEach(a => {
+  a.Expiry.$date.$numberLong = dateFns.addDays(Date.now(), 1).getTime();
+});
 
 // mock response from warframe API
 nock('http://content.warframe.com')
@@ -28,6 +34,9 @@ const mockInvasion = {
 describe('Warframe API handling', () => {
   test('should fetch invasions and alerts', async done => {
     const result = await fetchData();
+    // remove date from data to keep snapshot persistent
+    result.alerts[0].end = 'fixed';
+    // compare to snapshot
     expect(result).toMatchSnapshot();
     done();
   });

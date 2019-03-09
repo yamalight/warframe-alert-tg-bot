@@ -4,7 +4,7 @@ exports[`Warframe API handling should fetch invasions and alerts 1`] = `
 Object {
   "alerts": Array [
     Object {
-      "end": 2018-12-11T21:38:38.415Z,
+      "end": "fixed",
       "id": "5c1020a14c4d2f1f193cc4dd",
       "rewards": Array [
         "Alertium",
