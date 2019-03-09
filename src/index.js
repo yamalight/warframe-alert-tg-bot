@@ -45,7 +45,7 @@ const handleCheck = async ctx => {
  * Main function that starts the bot.
  * The bot will only work in one group / chat as it is now
  */
-module.exports = () => {
+module.exports = async () => {
   // bot status
   let status = 'waiting';
   // re-fetch interval reference
@@ -58,6 +58,8 @@ module.exports = () => {
 
   // telegraf bot instance
   const bot = new Telegraf(process.env.BOT_TOKEN);
+  const {username} = await bot.telegram.getMe();
+  bot.options.username = username;
 
   // start command
   // has to be invoke for bot to start handling alerts
