@@ -1,7 +1,7 @@
 const dateFns = require('date-fns');
 const Telegraf = require('telegraf');
 const Cache = require('ttl-mem-cache');
-const {fetchData, formatAlert, formatInvasion} = require('./api');
+const {fetchData, getBaro, formatAlert, formatInvasion} = require('./api');
 
 // Interval to re-fetch the data
 const CHECK_INTERVAL = 10 * 60 * 1000; // 10 mins
@@ -94,6 +94,13 @@ module.exports = () => {
     }
   });
 
+  // baro command
+  // gets info about baro's shop
+  bot.command('lwbaro', async ctx => {
+    const baroText = await getBaro();
+    ctx.reply(baroText);
+  });
+
   // help command
   // displays available commands to user
   bot.command('lwhelp', ctx => {
@@ -101,6 +108,7 @@ module.exports = () => {
 * /lwstart - will start monitoring process
 * /lwstop - will stop monitoring process
 * /lwstatus - will display current monitoring status
+* /lwbaro - will display current Baro offerings
 * /lwhelp - this help thingy`);
   });
 

@@ -284,5 +284,132 @@
       "DefenderMissionInfo": {"seed": 422578, "faction": "FC_INFESTATION"},
       "Activation": {"$date": {"$numberLong": "1544555701342"}}
     }
+  ],
+  "VoidTraders": [
+    {
+      "_id": {"$oid": "5b3f70c1be87e4524f04d5ec"},
+      "Activation": {"$date": {"$numberLong": "1552053600000"}},
+      "Expiry": {"$date": {"$numberLong": "1552222800000"}},
+      "Character": "Baro'Ki Teel",
+      "Node": "EarthHUB",
+      "Manifest": [
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Grineer/LongGuns/GrineerLeverActionRifle/PrismaGrinlokWeapon",
+          "PrimePrice": 500,
+          "RegularPrice": 220000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Mods/Melee/Expert/WeaponToxinDamageModExpert",
+          "PrimePrice": 350,
+          "RegularPrice": 200000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Mods/Pistol/DualStat/ElectEventPistolMod",
+          "PrimePrice": 300,
+          "RegularPrice": 150000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Mods/Melee/DualStat/ElectEventMeleeMod",
+          "PrimePrice": 300,
+          "RegularPrice": 150000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Mods/Rifle/DualStat/ElectEventRifleMod",
+          "PrimePrice": 300,
+          "RegularPrice": 150000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Mods/Shotgun/DualStat/ElectEventShotgunMod",
+          "PrimePrice": 300,
+          "RegularPrice": 150000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Corpus/Melee/KickAndPunch/PrismaObex",
+          "PrimePrice": 500,
+          "RegularPrice": 175000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Weapons/Grineer/Melee/GrineerMachetteAndCleaver/PrismaDualCleavers",
+          "PrimePrice": 490,
+          "RegularPrice": 200000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Scarves/PrismaRazorScarf",
+          "PrimePrice": 350,
+          "RegularPrice": 275000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Armor/BaroArmour/BaroArmourC",
+          "PrimePrice": 150,
+          "RegularPrice": 250000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Armor/BaroArmour/BaroArmourA",
+          "PrimePrice": 350,
+          "RegularPrice": 110000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Armor/BaroArmour/BaroArmourL",
+          "PrimePrice": 300,
+          "RegularPrice": 150000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Liset/LisetInsectSkinPrimeTrader",
+          "PrimePrice": 230,
+          "RegularPrice": 375000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Sentinels/Masks/BaroPetMask",
+          "PrimePrice": 500,
+          "RegularPrice": 200000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Sentinels/Wings/BaroPetWings",
+          "PrimePrice": 400,
+          "RegularPrice": 250000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Sentinels/Tails/BaroPetTail",
+          "PrimePrice": 400,
+          "RegularPrice": 250000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/VoidTrader/ElixisTigris",
+          "PrimePrice": 300,
+          "RegularPrice": 275000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/StoreItems/SuitCustomizations/ColourPickerKiteerItemA",
+          "PrimePrice": 150,
+          "RegularPrice": 300000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/MeleeDangles/BaroMeleeDangle",
+          "PrimePrice": 250,
+          "RegularPrice": 250000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/StoreItems/AvatarImages/ImageBaroKiteer",
+          "PrimePrice": 80,
+          "RegularPrice": 50000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/Operator/Accessories/BaroMouthPieceA",
+          "PrimePrice": 500,
+          "RegularPrice": 400000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Upgrades/Skins/VoidTrader/BaroArrow",
+          "PrimePrice": 375,
+          "RegularPrice": 300000
+        },
+        {
+          "ItemType": "/Lotus/StoreItems/Types/Game/KubrowPet/Patterns/KubrowPetPatternPrimeTraderA",
+          "PrimePrice": 150,
+          "RegularPrice": 300000
+        },
+        {"ItemType": "/Lotus/StoreItems/Types/Keys/MummyQuestKeyBlueprint", "PrimePrice": 100, "RegularPrice": 25000}
+      ]
+    }
   ]
 }

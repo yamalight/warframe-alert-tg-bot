@@ -1,7 +1,7 @@
 /* eslint-env jest */
 const nock = require('nock');
 const dateFns = require('date-fns');
-const {fetchData, formatAlert, formatInvasion} = require('../src/api');
+const {fetchData, formatAlert, formatInvasion, getBaro} = require('../src/api');
 const mockData = require('./fixtures/apiResponse.json');
 
 // update mock data timings
@@ -49,5 +49,10 @@ describe('Warframe API handling', () => {
   test('should format invasion info', () => {
     const invasionText = formatInvasion(mockInvasion);
     expect(invasionText).toMatchSnapshot();
+  });
+
+  test('should get and format baro info', async () => {
+    const baroText = await getBaro();
+    expect(baroText).toMatchSnapshot();
   });
 });

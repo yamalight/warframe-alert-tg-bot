@@ -86,6 +86,8 @@ exports.fetchData = async () => {
       invasion.attackReward.concat(invasion.defenderReward).some(reward => interestingItems.includes(reward))
     );
 
+  // parse baro info
+
   return {alerts, invasions};
 };
 
@@ -112,3 +114,29 @@ Rewards: ${invasion.attackReward
   .filter(r => r)
   .join(', ')}
 Current progress: ~${(Math.floor(Math.abs(invasion.count / invasion.goal) * 100) / 100) * 100}%`;
+
+exports.getBaro = async () => {
+  const response = await got(dataUrl, {json: true});
+  const {VoidTraders} = response.body;
+  const baro = VoidTraders.find(t => t.Character === "Baro'Ki Teel");
+
+  if (!baro) {
+    return 'Baro is not here yet!';
+  }
+
+  const now = Date.now();
+  const date = new Date(Number(baro.Expiry.$date.$numberLong));
+  let result = `Baro is here (leaves in ${dateFns.differenceInHours(date, now)}h)
+Here's what he has:`;
+
+  baro.Manifest.forEach(it => {
+    const {ItemType, PrimePrice, RegularPrice} = it;
+    const name = ItemType.split('/')
+      .pop()
+      .replace(/[A-Z]/g, ' $&');
+
+    result += `\n  ${name} - ${PrimePrice} ducats, ${RegularPrice} credits`;
+  });
+
+  return result;
+};
