@@ -63,7 +63,7 @@ module.exports = async () => {
 
   // start command
   // has to be invoke for bot to start handling alerts
-  bot.command('lwstart', async ctx => {
+  bot.command('start', async ctx => {
     // ignore multiple calls
     if (status === 'running') {
       ctx.reply('Already running!');
@@ -84,11 +84,11 @@ module.exports = async () => {
 
   // status command
   // reports current bot status
-  bot.command('lwstatus', ctx => ctx.reply(`Current status: ${status}`));
+  bot.command('status', ctx => ctx.reply(`Current status: ${status}`));
 
   // stop command
   // stops current alert monitoring, cleans up refresh interval
-  bot.command('lwstop', ctx => {
+  bot.command('stop', ctx => {
     status = 'stopped';
     ctx.reply('Will no longer report alerts!');
     if (nextCheckInterval) {
@@ -98,20 +98,20 @@ module.exports = async () => {
 
   // baro command
   // gets info about baro's shop
-  bot.command('lwbaro', async ctx => {
+  bot.command('baro', async ctx => {
     const baroText = await getBaro();
     ctx.reply(baroText);
   });
 
   // help command
   // displays available commands to user
-  bot.command('lwhelp', ctx => {
+  bot.command('help', ctx => {
     ctx.reply(`Here's commands I know:
-* /lwstart - will start monitoring process
-* /lwstop - will stop monitoring process
-* /lwstatus - will display current monitoring status
-* /lwbaro - will display current Baro offerings
-* /lwhelp - this help thingy`);
+* /start - will start monitoring process
+* /stop - will stop monitoring process
+* /status - will display current monitoring status
+* /baro - will display current Baro offerings
+* /help - this help thingy`);
   });
 
   // start polling chat for messages
