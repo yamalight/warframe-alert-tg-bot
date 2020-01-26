@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Warframe API handling should fetch invasions and alerts 1`] = `
+exports[`Warframe API handling should fetch invasions, alerts and sentient outpost 1`] = `
 Object {
   "alerts": Array [
     Object {
@@ -24,6 +24,11 @@ Object {
       "id": "5c100cb560f09a7108813c9e",
     },
   ],
+  "sentientOutpost": Object {
+    "detectedDate": "fixed",
+    "id": "sentient_outpost_510",
+    "name": "Gian Point",
+  },
 }
 `;
 
@@ -41,7 +46,7 @@ Current progress: ~1%"
 `;
 
 exports[`Warframe API handling should get and format baro info 1`] = `
-"Baro is here (leaves in 20h)
+"Baro is here (leaves in -7726h)
 Here's what he has:
    Prisma Grinlok Weapon - 500 ducats, 220000 credits
    Weapon Toxin Damage Mod Expert - 350 ducats, 200000 credits
