@@ -118,12 +118,14 @@ exports.fetchData = async () => {
   try {
     const outpostJson = JSON.parse(Tmp);
     const outpostCode = outpostJson.sfn;
-    const outpostName = sentientOutpostValues[outpostCode];
-    sentientOutpost = {
-      id: `sentient_outpost_${outpostCode}`,
-      name: outpostName,
-      detectedDate: new Date()
-    };
+    if (outpostCode) {
+      const outpostName = sentientOutpostValues[outpostCode];
+      sentientOutpost = {
+        id: `sentient_outpost_${outpostCode}`,
+        name: outpostName,
+        detectedDate: new Date()
+      };
+    }
   } catch (e) {
     console.error("Error parsing sentient outpost:", e);
   }
