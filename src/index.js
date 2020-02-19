@@ -1,13 +1,16 @@
-const dateFns = require("date-fns");
-const Telegraf = require("telegraf");
-const Cache = require("ttl-mem-cache");
+const dateFns = require('date-fns');
+const Telegraf = require('telegraf');
+const Cache = require('ttl-mem-cache');
 const {
   fetchData,
   getBaro,
   formatAlert,
   formatInvasion,
   formatSentientOutpost
-} = require("./api");
+} = require('./api');
+
+// flag to log sentient outpost
+const TRACK_SENTIENT_OUTPOSTS = process.env.TRACK_SENTIENT_OUTPOSTS;
 
 // Interval to re-fetch the data
 const CHECK_INTERVAL = 10 * 60 * 1000; // 10 mins
@@ -53,7 +56,11 @@ const handleCheck = async ctx => {
     });
 
   // send sentient outpost data
-  if (sentientOutpost.id && !cache.get(sentientOutpost.id)) {
+  if (
+    TRACK_SENTIENT_OUTPOSTS === true &&
+    sentientOutpost.id &&
+    !cache.get(sentientOutpost.id)
+  ) {
     // add to cache
     cache.set(sentientOutpost.id, sentientOutpost.id, SENTIENT_TTL);
     // reply with formatted human-readable info about invasion
@@ -67,7 +74,7 @@ const handleCheck = async ctx => {
  */
 module.exports = async () => {
   // bot status
-  let status = "waiting";
+  let status = 'waiting';
   // re-fetch interval reference
   let nextCheckInterval = -1;
   // default context that is passed to handler
@@ -83,10 +90,10 @@ module.exports = async () => {
 
   // start command
   // has to be invoke for bot to start handling alerts
-  bot.command("start", async ctx => {
+  bot.command('start', async ctx => {
     // ignore multiple calls
-    if (status === "running") {
-      ctx.reply("Already running!");
+    if (status === 'running') {
+      ctx.reply('Already running!');
       return;
     }
 
@@ -95,7 +102,7 @@ module.exports = async () => {
       `OK, I'll let you know when cool things are in alerts or invasions.`
     );
     // set new status
-    status = "running";
+    status = 'running';
     // store chat context for replies
     context = ctx;
     // call initial alerts parsing
@@ -106,13 +113,13 @@ module.exports = async () => {
 
   // status command
   // reports current bot status
-  bot.command("status", ctx => ctx.reply(`Current status: ${status}`));
+  bot.command('status', ctx => ctx.reply(`Current status: ${status}`));
 
   // stop command
   // stops current alert monitoring, cleans up refresh interval
-  bot.command("stop", ctx => {
-    status = "stopped";
-    ctx.reply("Will no longer report alerts!");
+  bot.command('stop', ctx => {
+    status = 'stopped';
+    ctx.reply('Will no longer report alerts!');
     if (nextCheckInterval) {
       clearInterval(nextCheckInterval);
     }
@@ -120,14 +127,14 @@ module.exports = async () => {
 
   // baro command
   // gets info about baro's shop
-  bot.command("baro", async ctx => {
+  bot.command('baro', async ctx => {
     const baroText = await getBaro();
     ctx.reply(baroText);
   });
 
   // help command
   // displays available commands to user
-  bot.command("help", ctx => {
+  bot.command('help', ctx => {
     ctx.reply(`Here's commands I know:
 * /start - will start monitoring process
 * /stop - will stop monitoring process
@@ -138,5 +145,5 @@ module.exports = async () => {
 
   // start polling chat for messages
   bot.startPolling();
-  console.log("Bot is now running!");
+  console.log('Bot is now running!');
 };
