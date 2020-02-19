@@ -174,7 +174,7 @@ exports.getBaro = async () => {
   const { VoidTraders } = res;
   const baro = VoidTraders.find(t => t.Character === "Baro'Ki Teel");
 
-  if (!baro) {
+  if (!baro || !baro.Manifest) {
     return 'Baro is not here yet!';
   }
 
