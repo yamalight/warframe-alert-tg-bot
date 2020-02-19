@@ -1,8 +1,8 @@
-const got = require("got");
-const dateFns = require("date-fns");
+const got = require('got');
+const dateFns = require('date-fns');
 
 // Offical Warframe API endpoint, essentially a really big JSON dump
-const dataUrl = "http://content.warframe.com/dynamic/worldState.php";
+const dataUrl = 'http://content.warframe.com/dynamic/worldState.php';
 
 /**
  * Items of interest in invasions
@@ -11,31 +11,31 @@ const dataUrl = "http://content.warframe.com/dynamic/worldState.php";
  * but so far works fine)
  */
 const interestingItems = [
-  "OrokinReactorBlueprint",
-  "OrokinCatalystBlueprint",
-  "UtilityUnlockerBlueprint",
-  "PlayerMeleeWeaponRandomModRare",
-  "LotusModularMeleeRandomModRare",
-  "LotusPistolRandomModRare",
-  "LotusModularPistolRandomModRare",
-  "LotusRifleRandomModRare",
-  "LotusModularRifleRandomModRare",
-  "LotusShotgunRandomModRare",
-  "LotusModularShotgunRandomModRare"
+  'OrokinReactorBlueprint',
+  'OrokinCatalystBlueprint',
+  'UtilityUnlockerBlueprint',
+  'PlayerMeleeWeaponRandomModRare',
+  'LotusModularMeleeRandomModRare',
+  'LotusPistolRandomModRare',
+  'LotusModularPistolRandomModRare',
+  'LotusRifleRandomModRare',
+  'LotusModularRifleRandomModRare',
+  'LotusShotgunRandomModRare',
+  'LotusModularShotgunRandomModRare'
 ];
 
 /**
  * Sentient outpost values to names mapping
  */
 const sentientOutpostValues = {
-  505: "Ruse War Field",
-  510: "Gian Point",
-  550: "Nsu Grid",
+  505: 'Ruse War Field',
+  510: 'Gian Point',
+  550: 'Nsu Grid',
   551: `Ganalen's Grave`,
-  552: "Rya",
-  553: "Flexa",
-  554: "H-2 Cloud",
-  555: "R-9 Cloud"
+  552: 'Rya',
+  553: 'Flexa',
+  554: 'H-2 Cloud',
+  555: 'R-9 Cloud'
 };
 
 /**
@@ -43,29 +43,29 @@ const sentientOutpostValues = {
  * Follows the same pattern as invasion items
  */
 const interestingItemsAlerts = interestingItems.concat([
-  "FormaBlueprint",
-  "Alertium",
-  "CatbrowGeneticSignature"
+  'FormaBlueprint',
+  'Alertium',
+  'CatbrowGeneticSignature'
 ]);
 
 /**
  * Mappings between item values and human-readable names
  */
 const itemNames = {
-  OrokinReactorBlueprint: "Orokin Reactor Blueprint",
-  OrokinCatalystBlueprint: "Orokin Catalyst Blueprint",
-  Alertium: "Nitain",
-  FormaBlueprint: "Forma Blueprint",
-  UtilityUnlockerBlueprint: "Exilus Adapter",
-  PlayerMeleeWeaponRandomModRare: "Melee Riven Mod",
-  LotusModularMeleeRandomModRare: "Zaw Riven Mod",
-  LotusPistolRandomModRare: "Pistol Riven Mod",
-  LotusModularPistolRandomModRare: "Kitgun Riven Mod",
-  LotusRifleRandomModRare: "Rifle Riven Mod",
-  LotusModularRifleRandomModRare: "Modular Rifle Riven Mod",
-  LotusShotgunRandomModRare: "Shotgun Riven Mod",
-  LotusModularShotgunRandomModRare: "Modular Shotgun Riven Mod",
-  CatbrowGeneticSignature: "Kavat Genetic Code"
+  OrokinReactorBlueprint: 'Orokin Reactor Blueprint',
+  OrokinCatalystBlueprint: 'Orokin Catalyst Blueprint',
+  Alertium: 'Nitain',
+  FormaBlueprint: 'Forma Blueprint',
+  UtilityUnlockerBlueprint: 'Exilus Adapter',
+  PlayerMeleeWeaponRandomModRare: 'Melee Riven Mod',
+  LotusModularMeleeRandomModRare: 'Zaw Riven Mod',
+  LotusPistolRandomModRare: 'Pistol Riven Mod',
+  LotusModularPistolRandomModRare: 'Kitgun Riven Mod',
+  LotusRifleRandomModRare: 'Rifle Riven Mod',
+  LotusModularRifleRandomModRare: 'Modular Rifle Riven Mod',
+  LotusShotgunRandomModRare: 'Shotgun Riven Mod',
+  LotusModularShotgunRandomModRare: 'Modular Shotgun Riven Mod',
+  CatbrowGeneticSignature: 'Kavat Genetic Code'
 };
 
 /**
@@ -87,7 +87,7 @@ exports.fetchData = async () => {
       .concat(
         (a.MissionInfo.missionReward.countedItems || []).map(it => it.ItemType)
       )
-      .map(reward => reward.split("/").pop())
+      .map(reward => reward.split('/').pop())
   }))
     .filter(a => a.end.getTime() > now)
     .filter(alert =>
@@ -101,10 +101,10 @@ exports.fetchData = async () => {
       count: i.Count,
       goal: i.Goal,
       attackReward: (i.AttackerReward.countedItems || []).map(it =>
-        it.ItemType.split("/").pop()
+        it.ItemType.split('/').pop()
       ),
       defenderReward: (i.DefenderReward.countedItems || []).map(it =>
-        it.ItemType.split("/").pop()
+        it.ItemType.split('/').pop()
       )
     }))
     .filter(invasion =>
@@ -127,7 +127,7 @@ exports.fetchData = async () => {
       };
     }
   } catch (e) {
-    console.error("Error parsing sentient outpost:", e);
+    console.error('Error parsing sentient outpost:', e);
   }
 
   return { alerts, invasions, sentientOutpost };
@@ -141,12 +141,12 @@ exports.formatAlert = ({ alert, now }) => `NEW ALERT:
 Rewards: ${alert.rewards
   .map(reward => itemNames[reward])
   .filter(r => r)
-  .join(" ")}
+  .join(' ')}
 Ends in: ${dateFns.differenceInMinutes(alert.end, now)} mins
 ${
   alert.start > now
     ? `Starts in: ${dateFns.differenceInMinutes(alert.start, now)} mins`
-    : ""
+    : ''
 }`;
 
 /**
@@ -158,7 +158,7 @@ Rewards: ${invasion.attackReward
   .concat(invasion.defenderReward)
   .map(reward => itemNames[reward])
   .filter(r => r)
-  .join(", ")}
+  .join(', ')}
 Current progress: ~${(Math.floor(
   Math.abs(invasion.count / invasion.goal) * 100
 ) /
@@ -166,11 +166,16 @@ Current progress: ~${(Math.floor(
   100}%`;
 
 exports.getBaro = async () => {
-  const { VoidTraders } = await got(dataUrl).json();
+  const res = await got(dataUrl).json();
+  if (!res.VoidTraders) {
+    return;
+  }
+
+  const { VoidTraders } = res;
   const baro = VoidTraders.find(t => t.Character === "Baro'Ki Teel");
 
   if (!baro) {
-    return "Baro is not here yet!";
+    return 'Baro is not here yet!';
   }
 
   const now = Date.now();
@@ -183,9 +188,9 @@ Here's what he has:`;
 
   baro.Manifest.forEach(it => {
     const { ItemType, PrimePrice, RegularPrice } = it;
-    const name = ItemType.split("/")
+    const name = ItemType.split('/')
       .pop()
-      .replace(/[A-Z]/g, " $&");
+      .replace(/[A-Z]/g, ' $&');
 
     result += `\n  ${name} - ${PrimePrice} ducats, ${RegularPrice} credits`;
   });
