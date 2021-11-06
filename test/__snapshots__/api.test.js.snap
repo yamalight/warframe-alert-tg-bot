@@ -65,8 +65,8 @@ Object {
 exports[`Warframe API handling should format alert info 1`] = `
 "NEW ALERT:
 Rewards: Nitain x2
-Ends in: 5 days mins
-Starts in: 5 minutes mins"
+Ends in: 5 days
+Starts in: 5 minutes"
 `;
 
 exports[`Warframe API handling should format invasion info 1`] = `

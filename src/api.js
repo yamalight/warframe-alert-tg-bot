@@ -148,8 +148,8 @@ Rewards: ${alert.rewards
     .map((reward) => (reward.count > 1 ? `${itemNames[reward.name]} x${reward.count}` : itemNames[reward.name]))
     .filter((r) => r)
     .join(' ')}
-Ends in: ${formatDistance(alert.end, now)} mins
-${alert.start > now ? `Starts in: ${formatDistance(alert.start, now)} mins` : ''}`;
+Ends in: ${formatDistance(alert.end, now)}
+${alert.start > now ? `Starts in: ${formatDistance(alert.start, now)}` : ''}`;
 }
 
 /**
