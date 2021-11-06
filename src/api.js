@@ -1,5 +1,5 @@
-const got = require('got');
-const dateFns = require('date-fns');
+import { differenceInHours, differenceInMinutes } from 'date-fns';
+import got from 'got';
 
 // Offical Warframe API endpoint, essentially a really big JSON dump
 const dataUrl = 'http://content.warframe.com/dynamic/worldState.php';
@@ -21,7 +21,7 @@ const interestingItems = [
   'LotusRifleRandomModRare',
   'LotusModularRifleRandomModRare',
   'LotusShotgunRandomModRare',
-  'LotusModularShotgunRandomModRare'
+  'LotusModularShotgunRandomModRare',
 ];
 
 /**
@@ -35,7 +35,7 @@ const sentientOutpostValues = {
   552: 'Rya',
   553: 'Flexa',
   554: 'H-2 Cloud',
-  555: 'R-9 Cloud'
+  555: 'R-9 Cloud',
 };
 
 /**
@@ -43,9 +43,12 @@ const sentientOutpostValues = {
  * Follows the same pattern as invasion items
  */
 const interestingItemsAlerts = interestingItems.concat([
+  'Forma',
+  'FormaUmbra',
   'FormaBlueprint',
   'Alertium',
-  'CatbrowGeneticSignature'
+  'CatbrowGeneticSignature',
+  'MarketTier3FusionBundle',
 ]);
 
 /**
@@ -55,7 +58,10 @@ const itemNames = {
   OrokinReactorBlueprint: 'Orokin Reactor Blueprint',
   OrokinCatalystBlueprint: 'Orokin Catalyst Blueprint',
   Alertium: 'Nitain',
+  Forma: 'Forma',
+  FormaUmbra: 'Umbra Forma',
   FormaBlueprint: 'Forma Blueprint',
+  MarketTier3FusionBundle: '1000 endo',
   UtilityUnlockerBlueprint: 'Exilus Adapter',
   PlayerMeleeWeaponRandomModRare: 'Melee Riven Mod',
   LotusModularMeleeRandomModRare: 'Zaw Riven Mod',
@@ -65,7 +71,7 @@ const itemNames = {
   LotusModularRifleRandomModRare: 'Modular Rifle Riven Mod',
   LotusShotgunRandomModRare: 'Shotgun Riven Mod',
   LotusModularShotgunRandomModRare: 'Modular Shotgun Riven Mod',
-  CatbrowGeneticSignature: 'Kavat Genetic Code'
+  CatbrowGeneticSignature: 'Kavat Genetic Code',
 };
 
 /**
@@ -73,44 +79,49 @@ const itemNames = {
  * simply formatted arrays of invasions and alerts
  * that include interesting items
  */
-exports.fetchData = async () => {
+export async function fetchData() {
   const { Alerts, Invasions, Tmp } = await got(dataUrl).json();
 
   // parse alerts
   const now = Date.now();
-  const alerts = Alerts.map(a => ({
+  const alerts = Alerts.map((a) => ({
     id: a._id.$oid,
     start: new Date(Number(a.Activation.$date.$numberLong)),
     end: new Date(Number(a.Expiry.$date.$numberLong)),
     type: a.MissionInfo.missionType,
-    rewards: (a.MissionInfo.missionReward.items || [])
-      .concat(
-        (a.MissionInfo.missionReward.countedItems || []).map(it => it.ItemType)
-      )
-      .map(reward => reward.split('/').pop())
+    rewards: (a.MissionInfo.missionReward.items || []).concat(
+      (a.MissionInfo.missionReward.countedItems || []).map((it) => ({
+        name: it.ItemType.split('/').pop(),
+        count: it.ItemCount,
+      }))
+    ),
   }))
-    .filter(a => a.end.getTime() > now)
-    .filter(alert =>
-      alert.rewards.some(reward => interestingItemsAlerts.includes(reward))
+    .filter((a) => a.end.getTime() > now)
+    .filter((alert) =>
+      alert.rewards.some((reward) =>
+        interestingItemsAlerts.includes(reward.name)
+      )
     );
 
   // parse invasions
-  const invasions = Invasions.filter(i => !i.Completed)
-    .map(i => ({
+  const invasions = Invasions.filter((i) => !i.Completed)
+    .map((i) => ({
       id: i._id.$oid,
       count: i.Count,
       goal: i.Goal,
-      attackReward: (i.AttackerReward.countedItems || []).map(it =>
-        it.ItemType.split('/').pop()
-      ),
-      defenderReward: (i.DefenderReward.countedItems || []).map(it =>
-        it.ItemType.split('/').pop()
-      )
+      attackReward: (i.AttackerReward.countedItems || []).map((it) => ({
+        name: it.ItemType.split('/').pop(),
+        count: it.ItemCount,
+      })),
+      defenderReward: (i.DefenderReward.countedItems || []).map((it) => ({
+        name: it.ItemType.split('/').pop(),
+        count: it.ItemCount,
+      })),
     }))
-    .filter(invasion =>
+    .filter((invasion) =>
       invasion.attackReward
         .concat(invasion.defenderReward)
-        .some(reward => interestingItems.includes(reward))
+        .some((reward) => interestingItems.includes(reward.name))
     );
 
   // parse sentient outpost info
@@ -123,7 +134,7 @@ exports.fetchData = async () => {
       sentientOutpost = {
         id: `sentient_outpost_${outpostCode}`,
         name: outpostName,
-        detectedDate: new Date()
+        detectedDate: new Date(),
       };
     }
   } catch (e) {
@@ -131,48 +142,58 @@ exports.fetchData = async () => {
   }
 
   return { alerts, invasions, sentientOutpost };
-};
+}
 
 /**
  * Formats given alert into a string
  * @param {Object} alert
  */
-exports.formatAlert = ({ alert, now }) => `NEW ALERT:
+export function formatAlert({ alert, now }) {
+  return `NEW ALERT:
 Rewards: ${alert.rewards
-  .map(reward => itemNames[reward])
-  .filter(r => r)
-  .join(' ')}
-Ends in: ${dateFns.differenceInMinutes(alert.end, now)} mins
+    .map((reward) =>
+      reward.count > 1
+        ? `${itemNames[reward.name]} x${reward.count}`
+        : itemNames[reward.name]
+    )
+    .filter((r) => r)
+    .join(' ')}
+Ends in: ${differenceInMinutes(alert.end, now)} mins
 ${
   alert.start > now
-    ? `Starts in: ${dateFns.differenceInMinutes(alert.start, now)} mins`
+    ? `Starts in: ${differenceInMinutes(alert.start, now)} mins`
     : ''
 }`;
+}
 
 /**
  * Formats given invasion into a string
  * @param {Object} invasion
  */
-exports.formatInvasion = invasion => `NEW INVASION: 
+export function formatInvasion(invasion) {
+  return `NEW INVASION: 
 Rewards: ${invasion.attackReward
-  .concat(invasion.defenderReward)
-  .map(reward => itemNames[reward])
-  .filter(r => r)
-  .join(', ')}
-Current progress: ~${(Math.floor(
-  Math.abs(invasion.count / invasion.goal) * 100
-) /
-  100) *
-  100}%`;
+    .concat(invasion.defenderReward)
+    .map((reward) =>
+      reward.count > 1
+        ? `${itemNames[reward.name]} x${reward.count}`
+        : itemNames[reward.name]
+    )
+    .filter((r) => r)
+    .join(', ')}
+Current progress: ~${
+    (Math.floor(Math.abs(invasion.count / invasion.goal) * 100) / 100) * 100
+  }%`;
+}
 
-exports.getBaro = async () => {
+export async function getBaro() {
   const res = await got(dataUrl).json();
   if (!res.VoidTraders) {
     return;
   }
 
   const { VoidTraders } = res;
-  const baro = VoidTraders.find(t => t.Character === "Baro'Ki Teel");
+  const baro = VoidTraders.find((t) => t.Character === "Baro'Ki Teel");
 
   if (!baro || !baro.Manifest) {
     return 'Baro is not here yet!';
@@ -180,27 +201,23 @@ exports.getBaro = async () => {
 
   const now = Date.now();
   const date = new Date(Number(baro.Expiry.$date.$numberLong));
-  let result = `Baro is here (leaves in ${dateFns.differenceInHours(
-    date,
-    now
-  )}h)
+  let result = `Baro is here (leaves in ${differenceInHours(date, now)}h)
 Here's what he has:`;
 
-  baro.Manifest.forEach(it => {
+  baro.Manifest.forEach((it) => {
     const { ItemType, PrimePrice, RegularPrice } = it;
-    const name = ItemType.split('/')
-      .pop()
-      .replace(/[A-Z]/g, ' $&');
+    const name = ItemType.split('/').pop().replace(/[A-Z]/g, ' $&');
 
     result += `\n  ${name} - ${PrimePrice} ducats, ${RegularPrice} credits`;
   });
 
   return result;
-};
+}
 
 /**
  * Formats given sentient outpost into a string
  * @param {Object} outpost
  */
-exports.formatSentientOutpost = outpost =>
-  `NEW SENTIENT OUTPOST: ${outpost.name}`;
+export function formatSentientOutpost(outpost) {
+  return `NEW SENTIENT OUTPOST: ${outpost.name}`;
+}

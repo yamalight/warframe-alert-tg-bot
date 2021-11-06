@@ -1,16 +1,16 @@
-const dateFns = require('date-fns');
-const Telegraf = require('telegraf');
-const Cache = require('ttl-mem-cache');
-const {
+import { differenceInMilliseconds } from 'date-fns';
+import { Telegraf } from 'telegraf';
+import Cache from 'ttl-mem-cache';
+import {
   fetchData,
-  getBaro,
   formatAlert,
   formatInvasion,
-  formatSentientOutpost
-} = require('./api');
+  formatSentientOutpost,
+  getBaro,
+} from './api.js';
 
 // flag to log sentient outpost
-const TRACK_SENTIENT_OUTPOSTS = process.env.TRACK_SENTIENT_OUTPOSTS;
+const TRACK_SENTIENT_OUTPOSTS = process.env.TRACK_SENTIENT_OUTPOSTS === '1';
 
 // Interval to re-fetch the data
 const CHECK_INTERVAL = 10 * 60 * 1000; // 10 mins
@@ -25,21 +25,17 @@ const cache = new Cache();
  *
  * @param {*} ctx
  */
-const handleCheck = async ctx => {
+const handleCheck = async (ctx) => {
   const { alerts, invasions, sentientOutpost } = await fetchData();
 
   // send alert messages
   const now = Date.now();
   alerts
     // filter alert that were already sent to chat
-    .filter(alert => !cache.get(alert.id))
-    .forEach(alert => {
+    .filter((alert) => !cache.get(alert.id))
+    .forEach((alert) => {
       // add to cache
-      cache.set(
-        alert.id,
-        alert.id,
-        dateFns.differenceInMilliseconds(alert.end, now)
-      );
+      cache.set(alert.id, alert.id, differenceInMilliseconds(alert.end, now));
       // reply with formatted human-readable info about alert
       ctx.reply(formatAlert({ alert, now }));
     });
@@ -47,8 +43,8 @@ const handleCheck = async ctx => {
   // send invasion messages
   invasions
     // filter invasions that were already sent to chat
-    .filter(invasion => !cache.get(invasion.id))
-    .forEach(invasion => {
+    .filter((invasion) => !cache.get(invasion.id))
+    .forEach((invasion) => {
       // add to cache
       cache.set(invasion.id, invasion.id, INVASION_TTL);
       // reply with formatted human-readable info about invasion
@@ -72,7 +68,7 @@ const handleCheck = async ctx => {
  * Main function that starts the bot.
  * The bot will only work in one group / chat as it is now
  */
-module.exports = async () => {
+export default async () => {
   // bot status
   let status = 'waiting';
   // re-fetch interval reference
@@ -80,7 +76,7 @@ module.exports = async () => {
   // default context that is passed to handler
   let context = {
     // by default reply will log data to console
-    reply: (...args) => console.log(args)
+    reply: (...args) => console.log(args),
   };
 
   // telegraf bot instance
@@ -90,7 +86,7 @@ module.exports = async () => {
 
   // start command
   // has to be invoke for bot to start handling alerts
-  bot.command('start', async ctx => {
+  bot.command('start', async (ctx) => {
     // ignore multiple calls
     if (status === 'running') {
       ctx.reply('Already running!');
@@ -113,11 +109,11 @@ module.exports = async () => {
 
   // status command
   // reports current bot status
-  bot.command('status', ctx => ctx.reply(`Current status: ${status}`));
+  bot.command('status', (ctx) => ctx.reply(`Current status: ${status}`));
 
   // stop command
   // stops current alert monitoring, cleans up refresh interval
-  bot.command('stop', ctx => {
+  bot.command('stop', (ctx) => {
     status = 'stopped';
     ctx.reply('Will no longer report alerts!');
     if (nextCheckInterval) {
@@ -127,14 +123,14 @@ module.exports = async () => {
 
   // baro command
   // gets info about baro's shop
-  bot.command('baro', async ctx => {
+  bot.command('baro', async (ctx) => {
     const baroText = await getBaro();
     ctx.reply(baroText);
   });
 
   // help command
   // displays available commands to user
-  bot.command('help', ctx => {
+  bot.command('help', (ctx) => {
     ctx.reply(`Here's commands I know:
 * /start - will start monitoring process
 * /stop - will stop monitoring process

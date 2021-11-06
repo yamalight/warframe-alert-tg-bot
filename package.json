@@ -1,23 +1,28 @@
 {
   "name": "warframe-alert-bot",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js",
-    "test": "jest"
+    "test": "NODE_OPTIONS='--experimental-vm-modules --experimental-json-modules' jest"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "date-fns": "^2.9.0",
-    "got": "^10.3.0",
-    "telegraf": "^3.25.1",
+    "got": "^11.8.2",
+    "telegraf": "^4.4.2",
     "ttl-mem-cache": "^4.0.2"
   },
   "devDependencies": {
-    "jest": "^25.1.0",
-    "nock": "^11.7.2"
+    "jest": "^27.3.1",
+    "nock": "^13.1.4"
+  },
+  "jest": {
+    "transform": {},
+    "testEnvironment": "jest-environment-node"
   }
 }

@@ -61,7 +61,15 @@
         "difficulty": 0.82026105967078,
         "seed": 65562,
         "maxWaveNum": 2,
-        "missionReward": { "credits": 14000 }
+        "missionReward": {
+          "credits": 14000,
+          "countedItems": [
+            {
+              "ItemType": "/Lotus/Types/Items/MiscItems/Forma",
+              "ItemCount": 3
+            }
+          ]
+        }
       }
     },
     {
@@ -83,8 +91,8 @@
           "credits": 13100,
           "countedItems": [
             {
-              "ItemType": "/Lotus/Types/Items/MiscItems/Plastids",
-              "ItemCount": 300
+              "ItemType": "/Lotus/Types/Items/MiscItems/FormaUmbra",
+              "ItemCount": 1
             }
           ]
         }

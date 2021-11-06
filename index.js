@@ -1,3 +1,3 @@
-const startBot = require('./src');
+import startBot from './src/index.js';
 
 startBot();
