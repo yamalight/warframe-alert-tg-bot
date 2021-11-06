@@ -1,13 +1,7 @@
 import { differenceInMilliseconds } from 'date-fns';
 import { Telegraf } from 'telegraf';
 import Cache from 'ttl-mem-cache';
-import {
-  fetchData,
-  formatAlert,
-  formatInvasion,
-  formatSentientOutpost,
-  getBaro,
-} from './api.js';
+import { fetchData, formatAlert, formatInvasion, formatSentientOutpost, getBaro } from './api.js';
 
 // flag to log sentient outpost
 const TRACK_SENTIENT_OUTPOSTS = process.env.TRACK_SENTIENT_OUTPOSTS === '1';
@@ -52,11 +46,7 @@ const handleCheck = async (ctx) => {
     });
 
   // send sentient outpost data
-  if (
-    TRACK_SENTIENT_OUTPOSTS === true &&
-    sentientOutpost.id &&
-    !cache.get(sentientOutpost.id)
-  ) {
+  if (TRACK_SENTIENT_OUTPOSTS === true && sentientOutpost.id && !cache.get(sentientOutpost.id)) {
     // add to cache
     cache.set(sentientOutpost.id, sentientOutpost.id, SENTIENT_TTL);
     // reply with formatted human-readable info about invasion
@@ -94,9 +84,7 @@ export default async () => {
     }
 
     // notify user that we're starting
-    ctx.reply(
-      `OK, I'll let you know when cool things are in alerts or invasions.`
-    );
+    ctx.reply(`OK, I'll let you know when cool things are in alerts or invasions.`);
     // set new status
     status = 'running';
     // store chat context for replies

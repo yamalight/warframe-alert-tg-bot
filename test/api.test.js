@@ -15,10 +15,7 @@ const baro = mockData.VoidTraders.find((t) => t.Character === "Baro'Ki Teel");
 baro.Expiry.$date.$numberLong = addDays(Date.now(), 1).getTime();
 
 // mock response from warframe API
-nock('http://content.warframe.com')
-  .get('/dynamic/worldState.php')
-  .times(3)
-  .reply(200, mockData);
+nock('http://content.warframe.com').get('/dynamic/worldState.php').times(3).reply(200, mockData);
 
 // mock time now
 const mockNow = new Date(2018, 0, 1, 1, 1, 1, 1);

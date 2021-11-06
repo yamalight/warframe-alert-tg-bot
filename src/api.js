@@ -97,11 +97,7 @@ export async function fetchData() {
     ),
   }))
     .filter((a) => a.end.getTime() > now)
-    .filter((alert) =>
-      alert.rewards.some((reward) =>
-        interestingItemsAlerts.includes(reward.name)
-      )
-    );
+    .filter((alert) => alert.rewards.some((reward) => interestingItemsAlerts.includes(reward.name)));
 
   // parse invasions
   const invasions = Invasions.filter((i) => !i.Completed)
@@ -119,9 +115,7 @@ export async function fetchData() {
       })),
     }))
     .filter((invasion) =>
-      invasion.attackReward
-        .concat(invasion.defenderReward)
-        .some((reward) => interestingItems.includes(reward.name))
+      invasion.attackReward.concat(invasion.defenderReward).some((reward) => interestingItems.includes(reward.name))
     );
 
   // parse sentient outpost info
@@ -151,19 +145,11 @@ export async function fetchData() {
 export function formatAlert({ alert, now }) {
   return `NEW ALERT:
 Rewards: ${alert.rewards
-    .map((reward) =>
-      reward.count > 1
-        ? `${itemNames[reward.name]} x${reward.count}`
-        : itemNames[reward.name]
-    )
+    .map((reward) => (reward.count > 1 ? `${itemNames[reward.name]} x${reward.count}` : itemNames[reward.name]))
     .filter((r) => r)
     .join(' ')}
 Ends in: ${differenceInMinutes(alert.end, now)} mins
-${
-  alert.start > now
-    ? `Starts in: ${differenceInMinutes(alert.start, now)} mins`
-    : ''
-}`;
+${alert.start > now ? `Starts in: ${differenceInMinutes(alert.start, now)} mins` : ''}`;
 }
 
 /**
@@ -174,16 +160,10 @@ export function formatInvasion(invasion) {
   return `NEW INVASION: 
 Rewards: ${invasion.attackReward
     .concat(invasion.defenderReward)
-    .map((reward) =>
-      reward.count > 1
-        ? `${itemNames[reward.name]} x${reward.count}`
-        : itemNames[reward.name]
-    )
+    .map((reward) => (reward.count > 1 ? `${itemNames[reward.name]} x${reward.count}` : itemNames[reward.name]))
     .filter((r) => r)
     .join(', ')}
-Current progress: ~${
-    (Math.floor(Math.abs(invasion.count / invasion.goal) * 100) / 100) * 100
-  }%`;
+Current progress: ~${(Math.floor(Math.abs(invasion.count / invasion.goal) * 100) / 100) * 100}%`;
 }
 
 export async function getBaro() {
