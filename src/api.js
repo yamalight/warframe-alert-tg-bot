@@ -1,4 +1,4 @@
-import { differenceInHours, differenceInMinutes } from 'date-fns';
+import { differenceInHours, formatDistance } from 'date-fns';
 import got from 'got';
 
 // Offical Warframe API endpoint, essentially a really big JSON dump
@@ -148,8 +148,8 @@ Rewards: ${alert.rewards
     .map((reward) => (reward.count > 1 ? `${itemNames[reward.name]} x${reward.count}` : itemNames[reward.name]))
     .filter((r) => r)
     .join(' ')}
-Ends in: ${differenceInMinutes(alert.end, now)} mins
-${alert.start > now ? `Starts in: ${differenceInMinutes(alert.start, now)} mins` : ''}`;
+Ends in: ${formatDistance(alert.end, now)} mins
+${alert.start > now ? `Starts in: ${formatDistance(alert.start, now)} mins` : ''}`;
 }
 
 /**

@@ -23,7 +23,7 @@ const mockNow = new Date(2018, 0, 1, 1, 1, 1, 1);
 // mock alert data for formatting
 const mockAlert = {
   rewards: [{ name: 'Alertium', count: 2 }],
-  end: addMinutes(mockNow, 40),
+  end: addDays(mockNow, 5),
   start: addMinutes(mockNow, 5),
 };
 
