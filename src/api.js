@@ -56,7 +56,9 @@ const interestingItemsAlerts = interestingItems.concat([
  */
 const itemNames = {
   OrokinReactorBlueprint: 'Orokin Reactor Blueprint',
+  OrokinReactor: 'Orokin Reactor',
   OrokinCatalystBlueprint: 'Orokin Catalyst Blueprint',
+  OrokinCatalyst: 'Orokin Catalyst',
   Alertium: 'Nitain',
   Forma: 'Forma',
   FormaUmbra: 'Umbra Forma',
@@ -187,7 +189,7 @@ Current progress: ~${(Math.floor(Math.abs(invasion.count / invasion.goal) * 100)
 export function formatFomorian({ fomorian, now }) {
   return `NEW FOMORIAN EVENT:
 Rewards: ${fomorian.reward
-    .map((reward) => itemNames[reward.name])
+    .map((reward) => itemNames[reward])
     .filter((r) => r)
     .join(' ')}
 Ends in: ${formatDistance(fomorian.end, now)}

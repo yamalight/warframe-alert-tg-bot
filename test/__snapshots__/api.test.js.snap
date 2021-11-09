@@ -81,7 +81,7 @@ Starts in: 5 minutes"
 
 exports[`Warframe API handling should format fomorian info 1`] = `
 "NEW FOMORIAN EVENT:
-Rewards: 
+Rewards: Orokin Catalyst
 Ends in: 5 days
 "
 `;
