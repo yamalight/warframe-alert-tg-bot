@@ -40,6 +40,16 @@ Object {
       "type": "MT_DEFENSE",
     },
   ],
+  "fomorian": Object {
+    "count": 0,
+    "end": 2021-11-12T19:59:37.685Z,
+    "goal": 1000000,
+    "id": "618678cd103bd85d64a5df51",
+    "reward": Array [
+      "OrokinCatalyst",
+    ],
+    "start": 2021-11-08T18:46:45.000Z,
+  },
   "invasions": Array [
     Object {
       "attackReward": Array [],
@@ -67,6 +77,13 @@ exports[`Warframe API handling should format alert info 1`] = `
 Rewards: Nitain x2
 Ends in: 5 days
 Starts in: 5 minutes"
+`;
+
+exports[`Warframe API handling should format fomorian info 1`] = `
+"NEW FOMORIAN EVENT:
+Rewards: 
+Ends in: 5 days
+"
 `;
 
 exports[`Warframe API handling should format invasion info 1`] = `

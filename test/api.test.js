@@ -1,7 +1,7 @@
 import { describe, expect, test } from '@jest/globals';
 import { addDays, addMinutes } from 'date-fns';
 import nock from 'nock';
-import { fetchData, formatAlert, formatInvasion, getBaro } from '../src/api';
+import { fetchData, formatAlert, formatFomorian, formatInvasion, getBaro } from '../src/api';
 import mockData from './fixtures/apiResponse.json';
 
 // update mock data timings
@@ -34,6 +34,14 @@ const mockInvasion = {
   goal: 100,
 };
 
+const mockFomorian = {
+  count: 0,
+  end: addDays(mockNow, 5),
+  goal: 1000000,
+  reward: ['OrokinCatalyst'],
+  start: mockNow,
+};
+
 describe('Warframe API handling', () => {
   test('should fetch invasions, alerts and sentient outpost', async () => {
     const result = await fetchData();
@@ -57,5 +65,10 @@ describe('Warframe API handling', () => {
   test('should get and format baro info', async () => {
     const baroText = await getBaro();
     expect(baroText).toMatchSnapshot();
+  });
+
+  test('should format fomorian info', () => {
+    const fomorianText = formatFomorian({ fomorian: mockFomorian, now: mockNow });
+    expect(fomorianText).toMatchSnapshot();
   });
 });

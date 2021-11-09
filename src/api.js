@@ -80,7 +80,7 @@ const itemNames = {
  * that include interesting items
  */
 export async function fetchData() {
-  const { Alerts, Invasions, Tmp } = await got(dataUrl).json();
+  const { Alerts, Invasions, Goals, Tmp } = await got(dataUrl).json();
 
   // parse alerts
   const now = Date.now();
@@ -118,6 +118,17 @@ export async function fetchData() {
       invasion.attackReward.concat(invasion.defenderReward).some((reward) => interestingItems.includes(reward.name))
     );
 
+  // parse goal-based events
+  const fomorianData = Goals.find((i) => i.Fomorian === true);
+  const fomorian = {
+    id: fomorianData._id.$oid,
+    start: new Date(Number(fomorianData.Activation.$date.$numberLong)),
+    end: new Date(Number(fomorianData.Expiry.$date.$numberLong)),
+    count: fomorianData.Count,
+    goal: fomorianData.Goal,
+    reward: (fomorianData.Reward.items || []).map((it) => it.split('/').pop()),
+  };
+
   // parse sentient outpost info
   let sentientOutpost = {};
   try {
@@ -135,7 +146,7 @@ export async function fetchData() {
     console.error('Error parsing sentient outpost:', e);
   }
 
-  return { alerts, invasions, sentientOutpost };
+  return { alerts, invasions, fomorian, sentientOutpost };
 }
 
 /**
@@ -164,6 +175,20 @@ Rewards: ${invasion.attackReward
     .filter((r) => r)
     .join(', ')}
 Current progress: ~${(Math.floor(Math.abs(invasion.count / invasion.goal) * 100) / 100) * 100}%`;
+}
+
+/**
+ * Formats given fomorian event into a string
+ * @param {Object} fomorian
+ */
+export function formatFomorian({ fomorian, now }) {
+  return `NEW FOMORIAN EVENT:
+Rewards: ${fomorian.reward
+    .map((reward) => itemNames[reward.name])
+    .filter((r) => r)
+    .join(' ')}
+Ends in: ${formatDistance(fomorian.end, now)}
+${fomorian.start > now ? `Starts in: ${formatDistance(fomorian.start, now)}` : ''}`;
 }
 
 export async function getBaro() {

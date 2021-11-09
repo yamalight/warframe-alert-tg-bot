@@ -417,6 +417,106 @@
       "Activation": { "$date": { "$numberLong": "1544555701342" } }
     }
   ],
+  "Goals": [
+    {
+      "_id": { "$oid": "5c7cb0d00000000000000000" },
+      "Activation": { "$date": { "$numberLong": "1636390800000" } },
+      "Expiry": { "$date": { "$numberLong": "1637600400000" } },
+      "Node": "SolNode129",
+      "ScoreVar": "FissuresClosed",
+      "ScoreLocTag": "/Lotus/Language/G1Quests/HeatFissuresEventScore",
+      "Count": 3,
+      "HealthPct": 0.03,
+      "Regions": [1],
+      "Desc": "/Lotus/Language/G1Quests/HeatFissuresEventName",
+      "ToolTip": "/Lotus/Language/G1Quests/HeatFissuresEventDesc",
+      "OptionalInMission": true,
+      "Tag": "HeatFissure",
+      "UpgradeIds": [{ "$oid": "61858189175d629593dd6c0d" }, { "$oid": "61858189175d629593dd6c0e" }],
+      "Personal": true,
+      "Community": true,
+      "Goal": 100,
+      "Reward": {
+        "credits": 0,
+        "xp": 0,
+        "items": ["/Lotus/StoreItems/Weapons/Corpus/LongGuns/CrpBFG/Vandal/VandalCrpBFG"],
+        "countedItems": []
+      },
+      "InterimGoals": [5, 25, 50, 75],
+      "InterimRewards": [
+        { "credits": 0, "xp": 0, "items": ["/Lotus/StoreItems/Upgrades/Skins/Clan/OrbBadgeItem"], "countedItems": [] },
+        {
+          "credits": 0,
+          "xp": 0,
+          "items": [
+            "/Lotus/StoreItems/Upgrades/Mods/DualSource/Shotgun/ShotgunMedicMod",
+            "/Lotus/StoreItems/Upgrades/Mods/DualSource/Rifle/SerratedRushMod"
+          ],
+          "countedItems": []
+        },
+        {
+          "credits": 0,
+          "xp": 0,
+          "items": [
+            "/Lotus/StoreItems/Upgrades/Mods/DualSource/Pistol/MultishotDodgeMod",
+            "/Lotus/StoreItems/Upgrades/Mods/DualSource/Melee/CritDamageChargeSpeedMod"
+          ],
+          "countedItems": []
+        },
+        { "credits": 0, "xp": 0, "items": ["/Lotus/StoreItems/Upgrades/Skins/Sigils/OrbSigil"], "countedItems": [] }
+      ]
+    },
+    {
+      "_id": { "$oid": "618678cd103bd85d64a5df51" },
+      "Fomorian": true,
+      "Activation": { "$date": { "$numberLong": "1636397205000" } },
+      "Expiry": { "$date": { "$numberLong": "1636747177685" } },
+      "Count": 0,
+      "Goal": 1000000,
+      "HealthPct": 0.9095348,
+      "VictimNode": "EarthHUB",
+      "Personal": true,
+      "Best": true,
+      "ScoreVar": "FomorianEventScore",
+      "ScoreMaxTag": "FomorianEventScore",
+      "ScoreTagBlocksGuildTierChanges": false,
+      "Success": 0,
+      "Node": "EventNode2",
+      "Faction": "FC_GRINEER",
+      "Desc": "/Lotus/Language/G1Quests/FomorianRevengeBattleName",
+      "Icon": "/Lotus/Materials/Emblems/SlingStone2_e.png",
+      "RegionDrops": ["/Lotus/Types/Items/MiscItems/OmegaIsotopePickup"],
+      "ArchwingDrops": [],
+      "ScoreLocTag": "/Lotus/Language/Menu/FomorianScoreHint",
+      "Tag": "",
+      "MissionInfo": {
+        "missionType": "MT_SABOTAGE",
+        "faction": "FC_GRINEER",
+        "location": "EventNode2",
+        "levelOverride": "/Lotus/Levels/Proc/Space/SpaceGrineerFomorianAssaultProcLevel",
+        "enemySpec": "/Lotus/Types/Game/EnemySpecs/FomorianAttackSpec",
+        "minEnemyLevel": 20,
+        "maxEnemyLevel": 30,
+        "difficulty": 1,
+        "archwingRequired": true,
+        "requiredItems": ["/Lotus/StoreItems/Types/Restoratives/Consumable/FomorianNegator"],
+        "consumeRequiredItems": false,
+        "missionReward": { "randomizedItems": "fomorianRewardManifest" },
+        "vipAgent": "",
+        "leadersAlwaysAllowed": true,
+        "goalTag": "",
+        "levelAuras": [],
+        "icon": "/Lotus/Interface/Icons/Events/Fomorian.png"
+      },
+      "ContinuousHubEvent": {
+        "Transmission": "/Lotus/Sounds/Dialog/HubAnnouncements/HekPropoganda",
+        "Activation": { "$date": { "$numberLong": "1636397205000" } },
+        "Expiry": { "$date": { "$numberLong": "1636746577685" } },
+        "RepeatInterval": 1800
+      },
+      "Reward": { "credits": 200000, "items": ["/Lotus/StoreItems/Types/Items/MiscItems/OrokinCatalyst"] }
+    }
+  ],
   "VoidTraders": [
     {
       "_id": { "$oid": "5b3f70c1be87e4524f04d5ec" },
