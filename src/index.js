@@ -46,7 +46,8 @@ const handleCheck = async (ctx) => {
     });
 
   // send fomorian if present
-  if (fomorian) {
+  if (fomorian && !cache.get(fomorian.id)) {
+    cache.set(fomorian.id, fomorian.id, differenceInMilliseconds(fomorian.end, now));
     ctx.reply(formatFomorian({ fomorian, now }));
   }
 
