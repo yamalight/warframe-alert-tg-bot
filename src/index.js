@@ -1,7 +1,7 @@
 import { differenceInMilliseconds } from 'date-fns';
 import { Telegraf } from 'telegraf';
 import Cache from 'ttl-mem-cache';
-import { fetchData, formatAlert, formatInvasion, formatSentientOutpost, getBaro } from './api.js';
+import { fetchData, formatAlert, formatFomorian, formatInvasion, formatSentientOutpost, getBaro } from './api.js';
 
 // flag to log sentient outpost
 const TRACK_SENTIENT_OUTPOSTS = process.env.TRACK_SENTIENT_OUTPOSTS === '1';
@@ -20,7 +20,7 @@ const cache = new Cache();
  * @param {*} ctx
  */
 const handleCheck = async (ctx) => {
-  const { alerts, invasions, sentientOutpost } = await fetchData();
+  const { alerts, invasions, fomorian, sentientOutpost } = await fetchData();
 
   // send alert messages
   const now = Date.now();
@@ -44,6 +44,11 @@ const handleCheck = async (ctx) => {
       // reply with formatted human-readable info about invasion
       ctx.reply(formatInvasion(invasion));
     });
+
+  // send fomorian if present
+  if (fomorian) {
+    ctx.reply(formatFomorian({ fomorian, now }));
+  }
 
   // send sentient outpost data
   if (TRACK_SENTIENT_OUTPOSTS === true && sentientOutpost.id && !cache.get(sentientOutpost.id)) {

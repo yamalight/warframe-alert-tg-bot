@@ -120,14 +120,17 @@ export async function fetchData() {
 
   // parse goal-based events
   const fomorianData = Goals.find((i) => i.Fomorian === true);
-  const fomorian = {
-    id: fomorianData._id.$oid,
-    start: new Date(Number(fomorianData.Activation.$date.$numberLong)),
-    end: new Date(Number(fomorianData.Expiry.$date.$numberLong)),
-    count: fomorianData.Count,
-    goal: fomorianData.Goal,
-    reward: (fomorianData.Reward.items || []).map((it) => it.split('/').pop()),
-  };
+  let fomorian;
+  if (fomorianData) {
+    fomorian = {
+      id: fomorianData._id.$oid,
+      start: new Date(Number(fomorianData.Activation.$date.$numberLong)),
+      end: new Date(Number(fomorianData.Expiry.$date.$numberLong)),
+      count: fomorianData.Count,
+      goal: fomorianData.Goal,
+      reward: (fomorianData.Reward.items || []).map((it) => it.split('/').pop()),
+    };
+  }
 
   // parse sentient outpost info
   let sentientOutpost = {};
