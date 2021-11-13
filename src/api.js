@@ -126,12 +126,17 @@ export async function fetchData() {
     start: new Date(Number(a.Activation.$date.$numberLong)),
     end: new Date(Number(a.Expiry.$date.$numberLong)),
     type: a.MissionInfo.missionType,
-    rewards: (a.MissionInfo.missionReward.items || []).concat(
-      (a.MissionInfo.missionReward.countedItems || []).map((it) => ({
-        name: it.ItemType.split('/').pop(),
-        count: it.ItemCount,
+    rewards: (a.MissionInfo.missionReward.items || [])
+      .map((it) => ({
+        name: it.split('/').pop(),
+        count: 1,
       }))
-    ),
+      .concat(
+        (a.MissionInfo.missionReward.countedItems || []).map((it) => ({
+          name: it.ItemType.split('/').pop(),
+          count: it.ItemCount,
+        }))
+      ),
   }))
     .filter((a) => a.end.getTime() > now)
     .filter((alert) => {

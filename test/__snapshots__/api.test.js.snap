@@ -29,6 +29,18 @@ Object {
     },
     Object {
       "end": 2099-02-02T00:01:01.000Z,
+      "id": "61784e7921e6d32b2a09a5a3",
+      "rewards": Array [
+        Object {
+          "count": 1,
+          "name": "OrokinReactorBlueprint",
+        },
+      ],
+      "start": 2021-11-12T19:00:00.000Z,
+      "type": "MT_SURVIVAL",
+    },
+    Object {
+      "end": 2099-02-02T00:01:01.000Z,
       "id": "5c1027318d42022a4052d4fb",
       "rewards": Array [
         Object {

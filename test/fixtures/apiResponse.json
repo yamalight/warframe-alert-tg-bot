@@ -57,6 +57,28 @@
       "ForceUnlock": true
     },
     {
+      "_id": { "$oid": "61784e7921e6d32b2a09a5a3" },
+      "Activation": { "$date": { "$numberLong": "1636743600000" } },
+      "Expiry": { "$date": { "$numberLong": "1636916400000" } },
+      "MissionInfo": {
+        "location": "SolNode302",
+        "missionType": "MT_SURVIVAL",
+        "faction": "FC_CORPUS",
+        "difficulty": 1,
+        "missionReward": {
+          "credits": 40000,
+          "items": ["/Lotus/StoreItems/Types/Recipes/Components/OrokinReactorBlueprint"]
+        },
+        "levelOverride": "/Lotus/Levels/Proc/Orokin/OrokinMoonSurvival",
+        "enemySpec": "/Lotus/Types/Game/EnemySpecs/CorpusSurvivalA",
+        "minEnemyLevel": 30,
+        "maxEnemyLevel": 40,
+        "descText": "/Lotus/Language/Alerts/LotusGiftDesc",
+        "maxWaveNum": 10
+      },
+      "Tag": "LotusGift"
+    },
+    {
       "_id": { "$oid": "5c1024da4dac98ea843e1fa7" },
       "Activation": { "$date": { "$numberLong": "1544562129164" } },
       "Expiry": { "$date": { "$numberLong": "1544565676872" } },
