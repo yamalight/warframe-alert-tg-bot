@@ -137,7 +137,7 @@ export async function fetchData() {
     .filter((alert) => {
       return (
         alert.rewards.some((reward) => interestingItemsAlerts.includes(reward.name)) ||
-        alert.rewards.some((reward) => interestingItemsRegexAlerts.some((regex) => reward.name.match(regex)))
+        alert.rewards.some((reward) => interestingItemsRegexAlerts.some((regex) => reward.name?.match?.(regex)))
       );
     });
 
