@@ -17,6 +17,18 @@ Object {
     },
     Object {
       "end": 2099-02-02T00:01:01.000Z,
+      "id": "61784e57f22ed3753e157d21",
+      "rewards": Array [
+        Object {
+          "count": 75,
+          "name": "NoraIntermissionFourCreds",
+        },
+      ],
+      "start": 2021-11-12T19:00:00.000Z,
+      "type": "MT_SURVIVAL",
+    },
+    Object {
+      "end": 2099-02-02T00:01:01.000Z,
       "id": "5c1027318d42022a4052d4fb",
       "rewards": Array [
         Object {
@@ -75,6 +87,13 @@ Object {
 exports[`Warframe API handling should format alert info 1`] = `
 "NEW ALERT:
 Rewards: Nitain x2
+Ends in: 5 days
+Starts in: 5 minutes"
+`;
+
+exports[`Warframe API handling should format alert with nightwave creds 1`] = `
+"NEW ALERT:
+Rewards: Nightwave Creds x75
 Ends in: 5 days
 Starts in: 5 minutes"
 `;

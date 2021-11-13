@@ -29,6 +29,34 @@
       }
     },
     {
+      "_id": { "$oid": "61784e57f22ed3753e157d21" },
+      "Activation": { "$date": { "$numberLong": "1636743600000" } },
+      "Expiry": { "$date": { "$numberLong": "1636916400000" } },
+      "MissionInfo": {
+        "location": "SettlementNode3",
+        "missionType": "MT_SURVIVAL",
+        "faction": "FC_CORPUS",
+        "difficulty": 1,
+        "missionReward": {
+          "credits": 10000,
+          "countedItems": [
+            {
+              "ItemType": "/Lotus/Types/Items/MiscItems/NoraIntermissionFourCreds",
+              "ItemCount": 75
+            }
+          ]
+        },
+        "levelOverride": "/Lotus/Levels/Proc/Corpus/CorpusShipSurvivalRaid",
+        "enemySpec": "/Lotus/Types/Game/EnemySpecs/CorpusShipEnemySpecs/CorpusShipSurvivalA",
+        "minEnemyLevel": 20,
+        "maxEnemyLevel": 30,
+        "descText": "/Lotus/Language/Alerts/LotusGiftDesc",
+        "maxWaveNum": 10
+      },
+      "Tag": "LotusGift",
+      "ForceUnlock": true
+    },
+    {
       "_id": { "$oid": "5c1024da4dac98ea843e1fa7" },
       "Activation": { "$date": { "$numberLong": "1544562129164" } },
       "Expiry": { "$date": { "$numberLong": "1544565676872" } },

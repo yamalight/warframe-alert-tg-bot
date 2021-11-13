@@ -71,4 +71,10 @@ describe('Warframe API handling', () => {
     const fomorianText = formatFomorian({ fomorian: mockFomorian, now: mockNow });
     expect(fomorianText).toMatchSnapshot();
   });
+
+  test('should format alert with nightwave creds', () => {
+    mockAlert.rewards = [{ name: 'NoraIntermissionFourCreds', count: 75 }];
+    const alertText = formatAlert({ alert: mockAlert, now: mockNow });
+    expect(alertText).toMatchSnapshot();
+  });
 });

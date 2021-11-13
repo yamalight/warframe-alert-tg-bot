@@ -52,6 +52,14 @@ const interestingItemsAlerts = interestingItems.concat([
 ]);
 
 /**
+ * Items of interest in alerts (regexes for partial matches)
+ */
+const interestingItemsRegexAlerts = [
+  /* Nightwave creds, e.g. NoraIntermissionFourCreds */
+  /Creds$/,
+];
+
+/**
  * Mappings between item values and human-readable names
  */
 const itemNames = {
@@ -77,6 +85,33 @@ const itemNames = {
 };
 
 /**
+ * Mappings between item values and human-readable names
+ */
+const itemNamesRegex = [{ regex: /Creds$/, name: 'Nightwave Creds' }];
+
+/**
+ * Converts item label to human-readable name
+ * @param {String} item Item name
+ * @returns {string} Human-readable item name
+ */
+const itemLabelToName = (item) => {
+  // if there is direct mapping, use it
+  if (item in itemNames) {
+    return itemNames[item];
+  }
+
+  // otherwise, try to find a partial match via regex
+  for (const { regex, name } of itemNamesRegex) {
+    if (regex.test(item)) {
+      return name;
+    }
+  }
+
+  // If we don't have a name, just return the item
+  return item;
+};
+
+/**
  * Fetches data from warframe API and returns filtered,
  * simply formatted arrays of invasions and alerts
  * that include interesting items
@@ -99,7 +134,12 @@ export async function fetchData() {
     ),
   }))
     .filter((a) => a.end.getTime() > now)
-    .filter((alert) => alert.rewards.some((reward) => interestingItemsAlerts.includes(reward.name)));
+    .filter((alert) => {
+      return (
+        alert.rewards.some((reward) => interestingItemsAlerts.includes(reward.name)) ||
+        alert.rewards.some((reward) => interestingItemsRegexAlerts.some((regex) => reward.name.match(regex)))
+      );
+    });
 
   // parse invasions
   const invasions = Invasions.filter((i) => !i.Completed)
@@ -161,7 +201,9 @@ export async function fetchData() {
 export function formatAlert({ alert, now }) {
   return `NEW ALERT:
 Rewards: ${alert.rewards
-    .map((reward) => (reward.count > 1 ? `${itemNames[reward.name]} x${reward.count}` : itemNames[reward.name]))
+    .map((reward) =>
+      reward.count > 1 ? `${itemLabelToName(reward.name)} x${reward.count}` : itemLabelToName(reward.name)
+    )
     .filter((r) => r)
     .join(' ')}
 Ends in: ${formatDistance(alert.end, now)}
@@ -176,7 +218,9 @@ export function formatInvasion(invasion) {
   return `NEW INVASION: 
 Rewards: ${invasion.attackReward
     .concat(invasion.defenderReward)
-    .map((reward) => (reward.count > 1 ? `${itemNames[reward.name]} x${reward.count}` : itemNames[reward.name]))
+    .map((reward) =>
+      reward.count > 1 ? `${itemLabelToName(reward.name)} x${reward.count}` : itemLabelToName(reward.name)
+    )
     .filter((r) => r)
     .join(', ')}
 Current progress: ~${(Math.floor(Math.abs(invasion.count / invasion.goal) * 100) / 100) * 100}%`;
@@ -189,7 +233,7 @@ Current progress: ~${(Math.floor(Math.abs(invasion.count / invasion.goal) * 100)
 export function formatFomorian({ fomorian, now }) {
   return `NEW FOMORIAN EVENT:
 Rewards: ${fomorian.reward
-    .map((reward) => itemNames[reward])
+    .map((reward) => itemLabelToName(reward))
     .filter((r) => r)
     .join(' ')}
 Ends in: ${formatDistance(fomorian.end, now)}
