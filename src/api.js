@@ -11,7 +11,9 @@ const dataUrl = 'http://content.warframe.com/dynamic/worldState.php';
  * but so far works fine)
  */
 const interestingItems = [
+  'OrokinReactor',
   'OrokinReactorBlueprint',
+  'OrokinCatalyst',
   'OrokinCatalystBlueprint',
   'UtilityUnlockerBlueprint',
   'PlayerMeleeWeaponRandomModRare',
@@ -44,8 +46,9 @@ const sentientOutpostValues = {
  */
 const interestingItemsAlerts = interestingItems.concat([
   'Forma',
-  'FormaUmbra',
   'FormaBlueprint',
+  'FormaUmbra',
+  'UmbraFormaBlueprint',
   'Alertium',
   'CatbrowGeneticSignature',
   'MarketTier3FusionBundle',
@@ -57,6 +60,8 @@ const interestingItemsAlerts = interestingItems.concat([
 const interestingItemsRegexAlerts = [
   /* Nightwave creds, e.g. NoraIntermissionFourCreds */
   /Creds$/,
+  /* Factions standing */
+  /Standing/,
 ];
 
 /**
