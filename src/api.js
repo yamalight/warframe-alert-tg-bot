@@ -24,6 +24,8 @@ const interestingItems = [
   'LotusModularRifleRandomModRare',
   'LotusShotgunRandomModRare',
   'LotusModularShotgunRandomModRare',
+  'WeaponSecondaryArcaneUnlocker',
+  'WeaponUtilityUnlockerBlueprint',
 ];
 
 /**
@@ -87,6 +89,8 @@ const itemNames = {
   LotusShotgunRandomModRare: 'Shotgun Riven Mod',
   LotusModularShotgunRandomModRare: 'Modular Shotgun Riven Mod',
   CatbrowGeneticSignature: 'Kavat Genetic Code',
+  WeaponSecondaryArcaneUnlocker: 'Secondary Arcane Adapter',
+  WeaponUtilityUnlockerBlueprint: 'Exilus Weapon Adapter Blueprint',
 };
 
 /**
