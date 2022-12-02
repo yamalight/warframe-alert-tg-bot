@@ -21,7 +21,7 @@ const INVASION_TTL = 12 * 60 * 60 * 1000; // 12 hours
 // Time-to-live for sentient outpost data
 const SENTIENT_TTL = 30 * 60 * 1000; // 30 mins
 // Time-to-live for fissure data
-const FISSURE_TTL = 60 * 60 * 1000; // 1 hour
+const FISSURE_TTL = 2 * 60 * 60 * 1000; // 2 hours
 // cache for already mentioned things
 const cache = new Cache();
 
