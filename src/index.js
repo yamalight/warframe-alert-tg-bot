@@ -1,7 +1,15 @@
 import { differenceInMilliseconds } from 'date-fns';
 import { Telegraf } from 'telegraf';
 import Cache from 'ttl-mem-cache';
-import { fetchData, formatAlert, formatFomorian, formatInvasion, formatSentientOutpost, getBaro } from './api.js';
+import {
+  fetchData,
+  formatAlert,
+  formatFissure,
+  formatFomorian,
+  formatInvasion,
+  formatSentientOutpost,
+  getBaro,
+} from './api.js';
 
 // flag to log sentient outpost
 const TRACK_SENTIENT_OUTPOSTS = process.env.TRACK_SENTIENT_OUTPOSTS === '1';
@@ -12,6 +20,8 @@ const CHECK_INTERVAL = 10 * 60 * 1000; // 10 mins
 const INVASION_TTL = 12 * 60 * 60 * 1000; // 12 hours
 // Time-to-live for sentient outpost data
 const SENTIENT_TTL = 30 * 60 * 1000; // 30 mins
+// Time-to-live for fissure data
+const FISSURE_TTL = 60 * 60 * 1000; // 1 hour
 // cache for already mentioned things
 const cache = new Cache();
 
@@ -20,7 +30,7 @@ const cache = new Cache();
  * @param {*} ctx
  */
 const handleCheck = async (ctx) => {
-  const { alerts, invasions, fomorian, sentientOutpost } = await fetchData();
+  const { alerts, invasions, fomorian, sentientOutpost, steelPath } = await fetchData();
 
   // send alert messages
   const now = Date.now();
@@ -58,6 +68,17 @@ const handleCheck = async (ctx) => {
     // reply with formatted human-readable info about invasion
     ctx.reply(formatSentientOutpost(sentientOutpost));
   }
+
+  // send steelpath survival data
+  steelPath
+    .filter((fissure) => !cache.get(fissure.id))
+    // filter fissuers that were already sent to chat
+    .forEach((fissure) => {
+      // add to cache
+      cache.set(fissure.id, fissure.id, FISSURE_TTL);
+      // reply with formatted human-readable info about fissure
+      ctx.reply(formatFissure({ fissure, now }));
+    });
 };
 
 /**

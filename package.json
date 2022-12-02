@@ -15,7 +15,8 @@
     "date-fns": "^2.9.0",
     "got": "^11.8.2",
     "telegraf": "^4.4.2",
-    "ttl-mem-cache": "^4.0.2"
+    "ttl-mem-cache": "^4.0.2",
+    "warframe-worldstate-data": "^1.27.9"
   },
   "devDependencies": {
     "jest": "^27.3.1",

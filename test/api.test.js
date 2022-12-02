@@ -1,7 +1,7 @@
 import { describe, expect, test } from '@jest/globals';
 import { addDays, addMinutes } from 'date-fns';
 import nock from 'nock';
-import { fetchData, formatAlert, formatFomorian, formatInvasion, getBaro } from '../src/api';
+import { fetchData, formatAlert, formatFissure, formatFomorian, formatInvasion, getBaro } from '../src/api';
 import mockData from './fixtures/apiResponse.json';
 
 // update mock data timings
@@ -42,8 +42,16 @@ const mockFomorian = {
   start: mockNow,
 };
 
+const mockFissure = {
+  id: '63873031ffe083d6707ee1e8',
+  location: 'Selkie (Sedna)',
+  type: 'Axi',
+  start: addMinutes(mockNow, 5),
+  end: addMinutes(mockNow, 65),
+};
+
 describe('Warframe API handling', () => {
-  test('should fetch invasions, alerts and sentient outpost', async () => {
+  test('should fetch invasions, alerts, sentient outposts, steel path fissures', async () => {
     const result = await fetchData();
     // remove date from data to keep snapshot persistent
     result.alerts[0].end = 'fixed';
@@ -76,5 +84,10 @@ describe('Warframe API handling', () => {
     mockAlert.rewards = [{ name: 'NoraIntermissionFourCreds', count: 75 }];
     const alertText = formatAlert({ alert: mockAlert, now: mockNow });
     expect(alertText).toMatchSnapshot();
+  });
+
+  test('should format steel path fissure', () => {
+    const fissureText = formatFissure({ fissure: mockFissure, now: mockNow });
+    expect(fissureText).toMatchSnapshot();
   });
 });

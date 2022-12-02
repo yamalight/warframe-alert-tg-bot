@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Warframe API handling should fetch invasions, alerts and sentient outpost 1`] = `
+exports[`Warframe API handling should fetch invasions, alerts, sentient outposts, steel path fissures 1`] = `
 Object {
   "alerts": Array [
     Object {
@@ -93,6 +93,15 @@ Object {
     "id": "sentient_outpost_510",
     "name": "Gian Point",
   },
+  "steelPath": Array [
+    Object {
+      "end": 2022-11-30T11:36:50.798Z,
+      "id": "63873031ffe083d6707ee1e8",
+      "location": "Selkie (Sedna)",
+      "start": 2022-11-30T10:28:01.873Z,
+      "type": "Axi",
+    },
+  ],
 }
 `;
 
@@ -121,6 +130,14 @@ exports[`Warframe API handling should format invasion info 1`] = `
 "NEW INVASION: 
 Rewards: Orokin Reactor Blueprint x2, Orokin Catalyst Blueprint
 Current progress: ~1%"
+`;
+
+exports[`Warframe API handling should format steel path fissure 1`] = `
+"NEW STEEL PATH SURVIVAL FISSURE: 
+  Type: Axi
+  Location: Selkie (Sedna)
+  Ends in: about 1 hour
+  Starts in: 5 minutes"
 `;
 
 exports[`Warframe API handling should get and format baro info 1`] = `

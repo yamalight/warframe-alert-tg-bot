@@ -698,5 +698,416 @@
       ]
     }
   ],
+  "ActiveMissions": [
+    {
+      "_id": {
+        "$oid": "638722d5bc985979f1d59704"
+      },
+      "Region": 13,
+      "Seed": 68262,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669800661975"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669807690398"
+        }
+      },
+      "Node": "SolNode205",
+      "MissionType": "MT_EXTERMINATION",
+      "Modifier": "VoidT3"
+    },
+    {
+      "_id": {
+        "$oid": "63872965a43696fd4017e373"
+      },
+      "Region": 19,
+      "Seed": 210,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669802341858"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669808403212"
+        }
+      },
+      "Node": "SolNode748",
+      "MissionType": "MT_RESCUE",
+      "Modifier": "VoidT5",
+      "Hard": true
+    },
+    {
+      "_id": {
+        "$oid": "63872e152adc92061e79b2ec"
+      },
+      "Region": 10,
+      "Seed": 74951,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669803541486"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669808005405"
+        }
+      },
+      "Node": "SolNode141",
+      "MissionType": "MT_SABOTAGE",
+      "Modifier": "VoidT2"
+    },
+    {
+      "_id": {
+        "$oid": "63872e152adc92061e79b2ed"
+      },
+      "Region": 5,
+      "Seed": 19100,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669803541486"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669808074908"
+        }
+      },
+      "Node": "SolNode100",
+      "MissionType": "MT_SURVIVAL",
+      "Modifier": "VoidT2"
+    },
+    {
+      "_id": {
+        "$oid": "63872f423c4ee1b896ea5e09"
+      },
+      "Region": 10,
+      "Seed": 81728,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669803842002"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669810294121"
+        }
+      },
+      "Node": "SolNode147",
+      "MissionType": "MT_TERRITORY",
+      "Modifier": "VoidT2",
+      "Hard": true
+    },
+    {
+      "_id": {
+        "$oid": "63872f423c4ee1b896ea5e0a"
+      },
+      "Region": 5,
+      "Seed": 94976,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669803842002"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669810058296"
+        }
+      },
+      "Node": "SolNode25",
+      "MissionType": "MT_TERRITORY",
+      "Modifier": "VoidT2",
+      "Hard": true
+    },
+    {
+      "_id": {
+        "$oid": "63873031ffe083d6707ee1e8"
+      },
+      "Region": 12,
+      "Seed": 38573,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669804081873"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669808210798"
+        }
+      },
+      "Node": "SolNode187",
+      "MissionType": "MT_SURVIVAL",
+      "Modifier": "VoidT4",
+      "Hard": true
+    },
+    {
+      "_id": {
+        "$oid": "63873031ffe083d6707ee1e9"
+      },
+      "Region": 11,
+      "Seed": 15607,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669804081873"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669808478435"
+        }
+      },
+      "Node": "SolNode173",
+      "MissionType": "MT_MOBILE_DEFENSE",
+      "Modifier": "VoidT4",
+      "Hard": true
+    },
+    {
+      "_id": {
+        "$oid": "638730a92664cfe3bae2da97"
+      },
+      "Region": 9,
+      "Seed": 14019,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669804201133"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669808161401"
+        }
+      },
+      "Node": "SolNode72",
+      "MissionType": "MT_DEFENSE",
+      "Modifier": "VoidT4"
+    },
+    {
+      "_id": {
+        "$oid": "638730a92664cfe3bae2da98"
+      },
+      "Region": 11,
+      "Seed": 69689,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669804201133"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669807936597"
+        }
+      },
+      "Node": "SolNode162",
+      "MissionType": "MT_CAPTURE",
+      "Modifier": "VoidT4"
+    },
+    {
+      "_id": {
+        "$oid": "638730a92664cfe3bae2da99"
+      },
+      "Region": 12,
+      "Seed": 54578,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669804201133"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669808408922"
+        }
+      },
+      "Node": "SolNode196",
+      "MissionType": "MT_MOBILE_DEFENSE",
+      "Modifier": "VoidT4"
+    },
+    {
+      "_id": {
+        "$oid": "638734e1c2a29c62a193a24a"
+      },
+      "Region": 4,
+      "Seed": 31687,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669805281144"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669811741936"
+        }
+      },
+      "Node": "SolNode16",
+      "MissionType": "MT_EXCAVATE",
+      "Modifier": "VoidT1",
+      "Hard": true
+    },
+    {
+      "_id": {
+        "$oid": "638734e1c2a29c62a193a24b"
+      },
+      "Region": 2,
+      "Seed": 16164,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669805281144"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669809762251"
+        }
+      },
+      "Node": "SolNode22",
+      "MissionType": "MT_DEFENSE",
+      "Modifier": "VoidT1",
+      "Hard": true
+    },
+    {
+      "_id": {
+        "$oid": "638737ee25273a16140a3af1"
+      },
+      "Region": 19,
+      "Seed": 2881,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669806062063"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669813019752"
+        }
+      },
+      "Node": "SolNode745",
+      "MissionType": "MT_ARTIFACT",
+      "Modifier": "VoidT5"
+    },
+    {
+      "_id": {
+        "$oid": "638737ee25273a16140a3af2"
+      },
+      "Region": 19,
+      "Seed": 70597,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669806062063"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669810756959"
+        }
+      },
+      "Node": "SolNode744",
+      "MissionType": "MT_SURVIVAL",
+      "Modifier": "VoidT5"
+    },
+    {
+      "_id": {
+        "$oid": "638737ee25273a16140a3af3"
+      },
+      "Region": 4,
+      "Seed": 18347,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669806062063"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669812258792"
+        }
+      },
+      "Node": "SolNode68",
+      "MissionType": "MT_MOBILE_DEFENSE",
+      "Modifier": "VoidT1"
+    },
+    {
+      "_id": {
+        "$oid": "63873829125742d76459bf87"
+      },
+      "Region": 15,
+      "Seed": 38490,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669806121218"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669810553835"
+        }
+      },
+      "Node": "SolNode404",
+      "MissionType": "MT_SABOTAGE",
+      "Modifier": "VoidT3",
+      "Hard": true
+    },
+    {
+      "_id": {
+        "$oid": "63873829125742d76459bf88"
+      },
+      "Region": 13,
+      "Seed": 60621,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669806121218"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669811315781"
+        }
+      },
+      "Node": "SolNode217",
+      "MissionType": "MT_RESCUE",
+      "Modifier": "VoidT3",
+      "Hard": true
+    },
+    {
+      "_id": {
+        "$oid": "63873d5170bcfde1caa785d7"
+      },
+      "Region": 15,
+      "Seed": 37311,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669807441349"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669813082279"
+        }
+      },
+      "Node": "SolNode410",
+      "MissionType": "MT_MOBILE_DEFENSE",
+      "Modifier": "VoidT3"
+    },
+    {
+      "_id": {
+        "$oid": "63873d5170bcfde1caa785d8"
+      },
+      "Region": 7,
+      "Seed": 39859,
+      "Activation": {
+        "$date": {
+          "$numberLong": "1669807441349"
+        }
+      },
+      "Expiry": {
+        "$date": {
+          "$numberLong": "1669814126469"
+        }
+      },
+      "Node": "SolNode64",
+      "MissionType": "MT_TERRITORY",
+      "Modifier": "VoidT3"
+    }
+  ],
   "Tmp": "{\"sfn\":510}"
 }

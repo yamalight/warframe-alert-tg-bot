@@ -1,5 +1,6 @@
 import { differenceInHours, formatDistance } from 'date-fns';
 import got from 'got';
+import worldstateData from 'warframe-worldstate-data';
 
 // Offical Warframe API endpoint, essentially a really big JSON dump
 const dataUrl = 'http://content.warframe.com/dynamic/worldState.php';
@@ -40,6 +41,17 @@ const sentientOutpostValues = {
   553: 'Flexa',
   554: 'H-2 Cloud',
   555: 'R-9 Cloud',
+};
+
+/**
+ *
+ */
+const fissureModifiers = {
+  VoidT1: 'Lith',
+  VoidT2: 'Meso',
+  VoidT3: 'Neo',
+  VoidT4: 'Axi',
+  VoidT5: 'Requiem',
 };
 
 /**
@@ -126,7 +138,7 @@ const itemLabelToName = (item) => {
  * that include interesting items
  */
 export async function fetchData() {
-  const { Alerts, Invasions, Goals, Tmp } = await got(dataUrl).json();
+  const { Alerts, Invasions, Goals, ActiveMissions, Tmp } = await got(dataUrl).json();
 
   // parse alerts
   const now = Date.now();
@@ -205,7 +217,16 @@ export async function fetchData() {
     console.error('Error parsing sentient outpost:', e);
   }
 
-  return { alerts, invasions, fomorian, sentientOutpost };
+  // parse steel path void fissures survival
+  const steelPath = ActiveMissions.filter((m) => m.Hard && m.MissionType === 'MT_SURVIVAL').map((i) => ({
+    id: i._id.$oid,
+    start: new Date(Number(i.Activation.$date.$numberLong)),
+    end: new Date(Number(i.Expiry.$date.$numberLong)),
+    location: worldstateData.solNodes[i.Node]?.value ?? i.Node,
+    type: fissureModifiers[i.Modifier] ?? i.Modifier,
+  }));
+
+  return { alerts, invasions, fomorian, sentientOutpost, steelPath };
 }
 
 /**
@@ -252,6 +273,18 @@ Rewards: ${fomorian.reward
     .join(' ')}
 Ends in: ${formatDistance(fomorian.end, now)}
 ${fomorian.start > now ? `Starts in: ${formatDistance(fomorian.start, now)}` : ''}`;
+}
+
+/**
+ * Formats given fissure into a string
+ * @param {Object} fissure
+ */
+export function formatFissure({ fissure, now }) {
+  return `NEW STEEL PATH SURVIVAL FISSURE: 
+  Type: ${fissure.type}
+  Location: ${fissure.location}
+  Ends in: ${formatDistance(fissure.end, now)}
+  ${fissure.start > now ? `Starts in: ${formatDistance(fissure.start, now)}` : ''}`;
 }
 
 export async function getBaro() {
