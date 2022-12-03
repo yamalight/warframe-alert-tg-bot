@@ -44,7 +44,7 @@ const sentientOutpostValues = {
 };
 
 /**
- *
+ * Fissure level modifiers
  */
 const fissureModifiers = {
   VoidT1: 'Lith',
@@ -218,13 +218,19 @@ export async function fetchData() {
   }
 
   // parse steel path void fissures survival
-  const steelPath = ActiveMissions.filter((m) => m.Hard && m.MissionType === 'MT_SURVIVAL').map((i) => ({
-    id: i._id.$oid,
-    start: new Date(Number(i.Activation.$date.$numberLong)),
-    end: new Date(Number(i.Expiry.$date.$numberLong)),
-    location: worldstateData.solNodes[i.Node]?.value ?? i.Node,
-    type: fissureModifiers[i.Modifier] ?? i.Modifier,
-  }));
+  const steelPath = ActiveMissions
+    // only take steelpath missions
+    .filter((m) => m.Hard && m.MissionType === 'MT_SURVIVAL')
+    // only take grineer missions
+    .filter((m) => worldstateData.solNodes[m.Node]?.enemy === 'Grineer')
+    // map to final data for printing
+    .map((i) => ({
+      id: i._id.$oid,
+      start: new Date(Number(i.Activation.$date.$numberLong)),
+      end: new Date(Number(i.Expiry.$date.$numberLong)),
+      location: worldstateData.solNodes[i.Node]?.value ?? i.Node,
+      type: fissureModifiers[i.Modifier] ?? i.Modifier,
+    }));
 
   return { alerts, invasions, fomorian, sentientOutpost, steelPath };
 }
